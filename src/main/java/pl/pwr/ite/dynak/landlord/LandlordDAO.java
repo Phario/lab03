@@ -1,4 +1,4 @@
 package pl.pwr.ite.dynak.landlord;
 
-public interface LandLordDAO {
+public interface LandlordDAO {
 }

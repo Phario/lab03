@@ -1,12 +1,14 @@
-package pl.pwr.ite.dynak.tenant;
+package pl.pwr.ite.dynak.main;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
-public class TenantApp extends Application implements TenantDAO {
+
+public class StartupApp extends Application {
+    Stage stage = new Stage();
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws Exception {
         var grid = new GridPane();
         var buttonTenant = new Button("Tenant");
         var buttonLandlord = new Button("Landlord");

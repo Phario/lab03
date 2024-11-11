@@ -5,19 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de7cbaa3-72b0-4ede-a5bd-103aab667937" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identifier.sqlite" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/main/StartupApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/controller/ControllerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/controller/ControllerApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/main/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Phario&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Phario/lab03.git&quot;,
+    &quot;accountId&quot;: &quot;79635ead-7cfc-4fca-8dc0-68305983b444&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2o3lL7AyoQnwWbPG7UZjWkdNbmg" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -26,18 +55,79 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.StartupApp.executor": "Run",
+    "Application.TenantApp.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "Maven.lab03 [archetype:generate,\\...].executor": "Run",
+    "Maven.lab03 [clean].executor": "Run",
+    "Maven.lab03 [mvn,archetype:generate,\\...].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ]
   }
 }]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn mvn archetype:generate \         -DarchetypeGroupId=org.openjfx \         -DarchetypeArtifactId=javafx-archetype-simple \         -DarchetypeVersion=0.0.3 \         -DgroupId=org.openjfx \         -DartifactId=sample \         -Dversion=1.0.0 \         -Djavafx-version=23.0.1" />
+      <command value="mvn archetype:generate \         -DarchetypeGroupId=org.openjfx \         -DarchetypeArtifactId=javafx-archetype-simple \         -DarchetypeVersion=0.0.3 \         -DgroupId=org.openjfx \         -DartifactId=sample \         -Dversion=1.0.0 \         -Djavafx-version=23.0.1" />
+      <command value="mvn clean" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.TenantApp">
+    <configuration name="ControllerApp" type="Application" factoryName="Application" singleton="false">
+      <option name="MAIN_CLASS_NAME" value="pl.pwr.ite.dynak.controller.ControllerApp" />
+      <module name="lab03" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LandlordApp" type="Application" factoryName="Application" singleton="false">
+      <option name="MAIN_CLASS_NAME" value="pl.pwr.ite.dynak.landlord.LandlordApp" />
+      <module name="lab03" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StartupApp" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="pl.pwr.ite.dynak.main.StartupApp" />
+      <module name="lab03" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TenantApp" type="Application" factoryName="Application" singleton="false">
+      <option name="MAIN_CLASS_NAME" value="pl.pwr.ite.dynak.tenant.TenantApp" />
+      <module name="lab03" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.LandlordApp" />
+      <item itemvalue="Application.TenantApp" />
+      <item itemvalue="Application.ControllerApp" />
+      <item itemvalue="Application.StartupApp" />
+    </list>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
       </set>
     </attachedChunks>
   </component>
@@ -50,10 +140,23 @@
       <option name="presentableId" value="Default" />
       <updated>1730106082788</updated>
       <workItem from="1730106083661" duration="4000" />
+      <workItem from="1731248551112" duration="7584000" />
+      <workItem from="1731282937846" duration="2033000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
