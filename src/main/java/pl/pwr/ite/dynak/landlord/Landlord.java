@@ -1,4 +1,5 @@
 package pl.pwr.ite.dynak.landlord;
 
-public class Landlord {
+public class Landlord implements LandlordDAO {
+
 }

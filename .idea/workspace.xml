@@ -5,17 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de7cbaa3-72b0-4ede-a5bd-103aab667937" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identifier.sqlite" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/main/StartupApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/controller/ControllerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/controller/ControllerApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/main/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/controller/ControllerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/controller/ControllerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/Landlord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/Landlord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/Tenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/Tenant.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,33 +50,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.StartupApp.executor": "Run",
-    "Application.TenantApp.executor": "Run",
-    "Application.Unnamed.executor": "Run",
-    "Maven.lab03 [archetype:generate,\\...].executor": "Run",
-    "Maven.lab03 [clean].executor": "Run",
-    "Maven.lab03 [mvn,archetype:generate,\\...].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.StartupApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TenantApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lab03 [archetype:generate,\\...].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lab03 [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lab03 [mvn,archetype:generate,\\...].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn mvn archetype:generate \         -DarchetypeGroupId=org.openjfx \         -DarchetypeArtifactId=javafx-archetype-simple \         -DarchetypeVersion=0.0.3 \         -DgroupId=org.openjfx \         -DartifactId=sample \         -Dversion=1.0.0 \         -Djavafx-version=23.0.1" />

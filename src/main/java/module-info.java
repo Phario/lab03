@@ -6,4 +6,7 @@ module labzerothree {
     requires static lombok;
     requires javafx.controls;
     requires javafx.graphics;
+    requires java.sql;
+    requires org.xerial.sqlitejdbc; //db
+    requires org.slf4j; //logger
 }

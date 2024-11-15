@@ -6,11 +6,12 @@ import javafx.stage.Stage;
 
 import static javafx.application.Application.*;
 
-public class ControllerApp extends Application implements ControllerDAO{
+public class ControllerApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         GridPane grid = new GridPane();
     }
+
     public static void main(String[] args) {
         launch(args);
     }

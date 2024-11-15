@@ -1,4 +1,4 @@
 package pl.pwr.ite.dynak.tenant;
 
-public class Tenant {
+public class Tenant implements TenantDAO {
 }
