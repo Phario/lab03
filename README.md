@@ -14,8 +14,8 @@ Wymienieni aktorzy uzyskują dostęp do systemu za pośrednictwem osobnych aplik
   
     Zarządca: posiada konto w systemie, definiuje koszty zryczałtowanych opłat 
     za ogrzewanie dla poszczególnych lokali, zleca zadania wykonania odczytu 
-    podzielników ciepła, uruchamia rozliczenia kosztów
-  ogrzewania z uwzględnieniem stanu licznika głównego oraz zużycia ciepła na części wspólne (za pośrednictwem ZarządcaApp).  
+    podzielników ciepła, uruchamia rozliczenia kosztów ogrzewania z uwzględnieniem
+    stanu licznika głównego oraz zużycia ciepła na części wspólne (za pośrednictwem ZarządcaApp).  
 
 
 Zakres gromadzonych danych w systemie może być minimalny. Poniżej przedstawiono wstępny zarys modelu danych. Model ten należy zmodyfikować odpowiednio do potrzeb.
