@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de7cbaa3-72b0-4ede-a5bd-103aab667937" name="Changes" comment="">
+    <list default="true" id="de7cbaa3-72b0-4ede-a5bd-103aab667937" name="Changes" comment="I wonder if I messed this project up right now">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/main/DBCreation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/Landlord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/Landlord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/Tenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/Tenant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantDAO.java" afterDir="false" />
@@ -34,7 +42,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Phario/lab03.git&quot;,
-    &quot;accountId&quot;: &quot;79635ead-7cfc-4fca-8dc0-68305983b444&quot;
+    &quot;accountId&quot;: &quot;2a717c96-f688-4e7b-b9c1-c19335902d6f&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -48,6 +56,8 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.DBCreation.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LandlordApp.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Application.StartupApp.executor&quot;: &quot;Run&quot;,
     &quot;Application.TenantApp.executor&quot;: &quot;Run&quot;,
@@ -56,6 +66,7 @@
     &quot;Maven.lab03 [clean].executor&quot;: &quot;Run&quot;,
     &quot;Maven.lab03 [mvn,archetype:generate,\\...].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
@@ -65,6 +76,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -80,7 +92,7 @@
       <command value="mvn clean" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.TenantApp">
+  <component name="RunManager">
     <configuration name="ControllerApp" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="pl.pwr.ite.dynak.controller.ControllerApp" />
       <module name="lab03" />
@@ -119,8 +131,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
       </set>
     </attachedChunks>
   </component>
@@ -135,6 +147,11 @@
       <workItem from="1730106083661" duration="4000" />
       <workItem from="1731248551112" duration="7584000" />
       <workItem from="1731282937846" duration="2033000" />
+      <workItem from="1731875215262" duration="3801000" />
+      <workItem from="1731879190916" duration="3309000" />
+      <workItem from="1731885751111" duration="1251000" />
+      <workItem from="1731938795165" duration="8467000" />
+      <workItem from="1731967228666" duration="607000" />
     </task>
     <servers />
   </component>

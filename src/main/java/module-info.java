@@ -8,5 +8,5 @@ module labzerothree {
     requires javafx.graphics;
     requires java.sql;
     requires org.xerial.sqlitejdbc; //db
-    requires org.slf4j; //logger
+    //requires org.slf4j; //logger
 }
