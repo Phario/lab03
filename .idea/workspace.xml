@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de7cbaa3-72b0-4ede-a5bd-103aab667937" name="Changes" comment="I wonder if I messed this project up right now">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/main/DBCreation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="de7cbaa3-72b0-4ede-a5bd-103aab667937" name="Changes" comment="Start of something that may or may not work (let's hope it's the former).">
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/dataRecords/CounterStatesResults.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/propertyData.sqlite" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/Landlord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/Landlord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/main/DBCreation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/main/DBCreation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/Tenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/Tenant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,6 +64,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
@@ -92,7 +89,7 @@
       <command value="mvn clean" />
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.LandlordApp">
     <configuration name="ControllerApp" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="pl.pwr.ite.dynak.controller.ControllerApp" />
       <module name="lab03" />
@@ -151,8 +148,19 @@
       <workItem from="1731879190916" duration="3309000" />
       <workItem from="1731885751111" duration="1251000" />
       <workItem from="1731938795165" duration="8467000" />
-      <workItem from="1731967228666" duration="607000" />
+      <workItem from="1731967228666" duration="9344000" />
+      <workItem from="1732052722337" duration="311000" />
+      <workItem from="1732053076433" duration="4869000" />
     </task>
+    <task id="LOCAL-00001" summary="Start of something that may or may not work (let's hope it's the former).">
+      <option name="closed" value="true" />
+      <created>1731968096214</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731968096214</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,5 +176,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Start of something that may or may not work (let's hope it's the former)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Start of something that may or may not work (let's hope it's the former)." />
   </component>
 </project>

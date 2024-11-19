@@ -4,5 +4,5 @@ public interface TenantDAO {
     public void createBribe();
     public void updateCounter(float amount, int counterId);
     public void readBills();
-    public void deleteBills();
+    public void destroyBills();
 }
