@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de7cbaa3-72b0-4ede-a5bd-103aab667937" name="Changes" comment="Start of something that may or may not work (let's hope it's the former).">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/dataRecords/CounterStatesResults.java" afterDir="false" />
+    <list default="true" id="de7cbaa3-72b0-4ede-a5bd-103aab667937" name="Changes" comment="Landlord back-end progress (yes, I know what it sounds like)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/dataRecords/DueBillInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/dataRecords/TenantInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/propertyData.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/Landlord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/Landlord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/main/DBCreation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/main/DBCreation.java" afterDir="false" />
@@ -50,38 +51,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.DBCreation.executor&quot;: &quot;Run&quot;,
-    &quot;Application.LandlordApp.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.StartupApp.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TenantApp.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.lab03 [archetype:generate,\\...].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.lab03 [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.lab03 [mvn,archetype:generate,\\...].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.DBCreation.executor": "Run",
+    "Application.LandlordApp.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.StartupApp.executor": "Run",
+    "Application.TenantApp.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "Maven.lab03 [archetype:generate,\\...].executor": "Run",
+    "Maven.lab03 [clean].executor": "Run",
+    "Maven.lab03 [mvn,archetype:generate,\\...].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "database.query.execution",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn mvn archetype:generate \         -DarchetypeGroupId=org.openjfx \         -DarchetypeArtifactId=javafx-archetype-simple \         -DarchetypeVersion=0.0.3 \         -DgroupId=org.openjfx \         -DartifactId=sample \         -Dversion=1.0.0 \         -Djavafx-version=23.0.1" />
@@ -89,7 +90,7 @@
       <command value="mvn clean" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.LandlordApp">
+  <component name="RunManager">
     <configuration name="ControllerApp" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="pl.pwr.ite.dynak.controller.ControllerApp" />
       <module name="lab03" />
@@ -150,7 +151,8 @@
       <workItem from="1731938795165" duration="8467000" />
       <workItem from="1731967228666" duration="9344000" />
       <workItem from="1732052722337" duration="311000" />
-      <workItem from="1732053076433" duration="4869000" />
+      <workItem from="1732053076433" duration="4932000" />
+      <workItem from="1732101297186" duration="19608000" />
     </task>
     <task id="LOCAL-00001" summary="Start of something that may or may not work (let's hope it's the former).">
       <option name="closed" value="true" />
@@ -160,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731968096214</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Landlord back-end progress (yes, I know what it sounds like)">
+      <option name="closed" value="true" />
+      <created>1732058050938</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732058050938</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,6 +189,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Start of something that may or may not work (let's hope it's the former)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Start of something that may or may not work (let's hope it's the former)." />
+    <MESSAGE value="Landlord back-end progress (yes, I know what it sounds like)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Landlord back-end progress (yes, I know what it sounds like)" />
   </component>
 </project>

@@ -1,8 +1,12 @@
 package pl.pwr.ite.dynak.tenant;
 
+import pl.pwr.ite.dynak.dataRecords.DueBillInfo;
+
+import java.util.List;
+
 public interface TenantDAO {
     public void createBribe();
-    public void updateCounter(float amount, int counterId);
-    public void readBills();
+    public List<DueBillInfo> readDueBills();
+    public void updateCounter(int heatingTime);
     public void destroyBills();
 }
