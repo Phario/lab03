@@ -6,9 +6,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.pwr.ite.dynak.dataUtils.ControlOrderData;
+import pl.pwr.ite.dynak.dataUtils.InvalidIdException;
+
+import static pl.pwr.ite.dynak.controller.Controller.checkReportIdValidity;
+import static pl.pwr.ite.dynak.landlord.Landlord.checkFlatIdValidity;
 
 public class ControllerApp extends Application {
+    private static final Logger logger = LoggerFactory.getLogger(ControllerApp.class);
     public void orderReadout(Stage stage, ControlOrderData controlOrderData) {
         int orderId = controlOrderData.orderId();
         String orderDate = controlOrderData.date();

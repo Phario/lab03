@@ -7,14 +7,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.pwr.ite.dynak.dataUtils.DueBillInfo;
 import pl.pwr.ite.dynak.dataUtils.InvalidIdException;
-import pl.pwr.ite.dynak.dataUtils.TenantInfo;
-
 import java.util.List;
 
-import static pl.pwr.ite.dynak.tenant.Tenant.checkIdValidity;
+
+import static pl.pwr.ite.dynak.tenant.Tenant.*;
 public class TenantApp extends Application {
+    private static final Logger logger = LoggerFactory.getLogger(TenantApp.class);
     public void dueBillsReadout(Stage stage, List<DueBillInfo> dueBillInfoList) {
         var vbox = new VBox();
         vbox.setSpacing(10);
@@ -29,6 +31,7 @@ public class TenantApp extends Application {
         stage.setTitle("Due bills info readout");
         stage.show();
     }
+
     public void launchTenantApp(Stage stage, int tenantId) {
         var tenant = new Tenant(tenantId);
         var grid = new GridPane();
@@ -52,7 +55,12 @@ public class TenantApp extends Application {
         createPaymentButton.setOnAction(actionEvent -> {
             int billId = Integer.parseInt(fieldBillId.getText());
             String paymentDate = fieldPaymentDate.getText();
-            tenant.createPayment(billId, paymentDate);
+            try {
+                checkBillIdValidity(billId, tenantId);
+                tenant.createPayment(billId, paymentDate);
+            } catch (InvalidIdException e) {
+                logger.info(e.getMessage());
+            }
             fieldBillId.clear();
             fieldPaymentDate.clear();
         });
@@ -85,10 +93,10 @@ public class TenantApp extends Application {
         tenantIdButton.setOnAction(event -> {
             int tenantId = Integer.parseInt(fieldSubmitId.getText());
             try {
-                checkIdValidity(tenantId);
+                checkTenantIdValidity(tenantId);
                 launchTenantApp(stage, tenantId);
             } catch (InvalidIdException e) {
-                System.out.println(e.getMessage());
+                logger.error(e.getMessage());
             }
 
         });

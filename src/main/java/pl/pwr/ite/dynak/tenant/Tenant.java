@@ -58,7 +58,7 @@ public class Tenant implements TenantDAO {
                 dueBillInfoList.add(dueBillInfo);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
         return dueBillInfoList;
     }
@@ -78,7 +78,7 @@ public class Tenant implements TenantDAO {
             pstmtUpdateCounter.setInt(2, tenantId);
             pstmtUpdateCounter.executeUpdate();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -90,11 +90,11 @@ public class Tenant implements TenantDAO {
             pstmtUpdateCounter.setInt(1, tenantId);
             pstmtUpdateCounter.executeUpdate();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
-    public static void checkIdValidity(int tenantId) throws InvalidIdException {
+    public static void checkTenantIdValidity(int tenantId) throws InvalidIdException {
         var sqlGetIds = "SELECT tenantId FROM tenants";
         boolean tenantIdValidity = false;
         try (var conn = DriverManager.getConnection(databaseURL);
@@ -106,9 +106,28 @@ public class Tenant implements TenantDAO {
                 }
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
         if (!tenantIdValidity) {
+            throw new InvalidIdException();
+        }
+    }
+    public static void checkBillIdValidity(int billId, int tenantId) throws InvalidIdException {
+        var sqlGetIds = "SELECT billId FROM dueBills WHERE tenantId = ?";
+        boolean billIdValidity = false;
+        try (var conn = DriverManager.getConnection(databaseURL);
+             var pstmtGetIds = conn.prepareStatement(sqlGetIds)) {
+            pstmtGetIds.setInt(1, tenantId);
+            ResultSet rs = pstmtGetIds.executeQuery();
+            while (rs.next()) {
+                if (billId == rs.getInt("billId")) {
+                    billIdValidity = true;
+                }
+            }
+        } catch (SQLException e) {
+            logger.info(e.getMessage());
+        }
+        if (!billIdValidity) {
             throw new InvalidIdException();
         }
     }

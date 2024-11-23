@@ -7,15 +7,20 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.pwr.ite.dynak.dataUtils.ControlOrderData;
 import pl.pwr.ite.dynak.dataUtils.CounterStatesResults;
+import pl.pwr.ite.dynak.dataUtils.InvalidIdException;
 import pl.pwr.ite.dynak.dataUtils.TenantInfo;
+import pl.pwr.ite.dynak.tenant.TenantApp;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static pl.pwr.ite.dynak.landlord.Landlord.*;
 public class LandlordApp extends Application{
-
+    private static final Logger logger = LoggerFactory.getLogger(LandlordApp.class);
     public void lazyBunsIdListReadout(Stage stage, List<Integer> idList) {
         var vbox = new VBox();
         vbox.setSpacing(5);
@@ -93,7 +98,6 @@ public class LandlordApp extends Application{
         var fieldCTFlatId = new TextField();
         var fieldCBReportId = new TextField();
         var fieldCBDate = new TextField();
-        var fieldCRReportId = new TextField();
         var fieldAmount = new TextField();
         var fieldDFFlatId = new TextField();
         var fieldDTTenantId = new TextField();
@@ -104,7 +108,6 @@ public class LandlordApp extends Application{
         fieldCTFlatId.setPromptText("Flat ID");
         fieldCBReportId.setPromptText("Report ID");
         fieldCBDate.setPromptText("Date");
-        fieldCRReportId.setPromptText("Report ID");
         fieldAmount.setPromptText("Amount");
         fieldDTTenantId.setPromptText("Tenant ID");
         fieldDFFlatId.setPromptText("Flat ID");
@@ -113,15 +116,15 @@ public class LandlordApp extends Application{
         grid.add(createFlatButton, 0, 0);           grid.add(fieldCFHeatingPower, 1, 0);
         grid.add(createTenantButton, 0, 1);         grid.add(fieldName, 1, 1); grid.add(fieldCTFlatId, 2, 1);
         grid.add(createControlOrderButton, 0, 2);   grid.add(fieldCODate, 1, 2);
-        grid.add(createBillsButton, 0, 3);          grid.add(fieldCBReportId, 1, 3);grid.add(fieldCBDate, 2, 3);grid.add(fieldRate, 2, 3);
-        grid.add(readControlResultsButton, 0, 4);   grid.add(fieldCRReportId, 1, 4);
+        grid.add(createBillsButton, 0, 3);          grid.add(fieldCBReportId, 1, 3);grid.add(fieldCBDate, 2, 3);grid.add(fieldRate, 3, 3);
+        grid.add(readControlResultsButton, 0, 4);
         grid.add(readLazyBunsIdListButton, 0, 5);
         grid.add(readFlatsButton, 0, 6);
         grid.add(readTenantsButton, 0, 7);
         grid.add(updateMainCounterButton, 0, 8);    grid.add(fieldAmount, 1, 8);
         grid.add(destroyFlatButton, 0, 9);          grid.add(fieldDFFlatId, 1, 9);
         grid.add(destroyTenantButton, 0, 10);       grid.add(fieldDTTenantId, 1, 10);
-        var scene =new Scene(grid, 500, 400);
+        var scene =new Scene(grid, 600, 400);
         var landlord = new Landlord();
         createFlatButton.setOnAction(actionEvent -> {
             try {
@@ -136,7 +139,12 @@ public class LandlordApp extends Application{
         createTenantButton.setOnAction(actionEvent -> {
             String name = fieldName.getText();
             int ctFlatId = Integer.parseInt(fieldCTFlatId.getText());
-            landlord.createTenant(name, ctFlatId);
+            try {
+                checkFlatIdValidity(ctFlatId);
+                landlord.createTenant(name, ctFlatId);
+            } catch (InvalidIdException e) {
+                logger.info(e.getMessage());
+            }
             fieldName.clear();
             fieldCTFlatId.clear();
         });
@@ -149,16 +157,19 @@ public class LandlordApp extends Application{
             int cbReportId = Integer.parseInt(fieldCBReportId.getText());
             String cbDate = fieldCBDate.getText();
             int rate = Integer.parseInt(fieldRate.getText());
-            landlord.createBills(cbReportId, cbDate, rate);
+            try {
+                checkReportIdValidity(cbReportId);
+                landlord.createBills(cbReportId, cbDate, rate);
+            } catch (InvalidIdException e) {
+                logger.error(e.getMessage());
+            }
             fieldCBReportId.clear();
             fieldCBDate.clear();
             fieldRate.clear();
         });
         readControlResultsButton.setOnAction(actionEvent -> {
-            int crReportId = Integer.parseInt(fieldCRReportId.getText());
             Stage second1Stage = new Stage();
-            controlResultsReadout(second1Stage, landlord.readControlResults(crReportId));
-            fieldCRReportId.clear();
+            controlResultsReadout(second1Stage, landlord.readControlResults());
         });
         readLazyBunsIdListButton.setOnAction(actionEvent -> {
             Stage secondStage = new Stage();
@@ -179,12 +190,23 @@ public class LandlordApp extends Application{
         });
         destroyFlatButton.setOnAction(actionEvent -> {
             int dfFlatId = Integer.parseInt(fieldDFFlatId.getText());
-            landlord.destroyFlat(dfFlatId);
+            try {
+                checkFlatIdValidity(dfFlatId);
+                landlord.destroyFlat(dfFlatId);
+            } catch (InvalidIdException e) {
+                logger.info(e.getMessage());
+            }
             fieldDFFlatId.clear();
         });
         destroyTenantButton.setOnAction(actionEvent -> {
             int dtTenantId = Integer.parseInt(fieldDTTenantId.getText());
-            landlord.destroyTenant(dtTenantId);
+            try {
+                checkTenantIdValidity(dtTenantId);
+                landlord.destroyTenant(dtTenantId);
+            } catch (InvalidIdException e) {
+                logger.info(e.getMessage());
+            }
+
             fieldDTTenantId.clear();
         });
         stage.setScene(scene);

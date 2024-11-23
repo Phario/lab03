@@ -3,6 +3,7 @@ package pl.pwr.ite.dynak.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.pwr.ite.dynak.dataUtils.ControlOrderData;
+import pl.pwr.ite.dynak.dataUtils.InvalidIdException;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,8 +11,26 @@ import java.sql.SQLException;
 
 public class Controller implements ControllerDAO{
     private static final Logger logger = LoggerFactory.getLogger(Controller.class);
-    String databaseURL = "jdbc:sqlite:propertyData.sqlite";
+    static String databaseURL = "jdbc:sqlite:propertyData.sqlite";
 
+    public static void checkReportIdValidity(int reportId) throws InvalidIdException {
+        var sqlGetIds = "SELECT reportId FROM counterStatesReport";
+        boolean reportIdValidity = false;
+        try (var conn = DriverManager.getConnection(databaseURL);
+             var pstmtGetIds = conn.prepareStatement(sqlGetIds)) {
+            ResultSet rs = pstmtGetIds.executeQuery();
+            while (rs.next()) {
+                if (reportId == rs.getInt("reportId")) {
+                    reportIdValidity = true;
+                }
+            }
+        } catch (SQLException e) {
+            logger.info(e.getMessage());
+        }
+        if (!reportIdValidity) {
+            throw new InvalidIdException();
+        }
+    }
     @Override
     public void createReport(String date, int orderId) {
         var sqlGetCounterStates = "SELECT flatId, tenantId, counter FROM flats";
@@ -30,7 +49,7 @@ public class Controller implements ControllerDAO{
             }
             pstmtCreateReport.executeBatch();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
     @Override
@@ -45,7 +64,7 @@ public class Controller implements ControllerDAO{
             String date = rs.getString("date");
             controlOrderData = new ControlOrderData(orderId, date);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
         return controlOrderData;
     }
@@ -56,7 +75,7 @@ public class Controller implements ControllerDAO{
              var pstmt = conn.prepareStatement(sql)) {
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
     @Override
@@ -67,7 +86,7 @@ public class Controller implements ControllerDAO{
             pstmt.setInt(1, orderId);
             pstmt.execute();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 }

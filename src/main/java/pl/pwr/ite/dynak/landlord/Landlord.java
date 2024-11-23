@@ -12,8 +12,64 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Landlord implements LandlordDAO {
+
     private static final Logger logger = LoggerFactory.getLogger(Landlord.class);
-    String databaseURL = "jdbc:sqlite:propertyData.sqlite";
+    static String databaseURL = "jdbc:sqlite:propertyData.sqlite";
+
+    public static void checkTenantIdValidity(int tenantId) throws InvalidIdException {
+        var sqlGetIds = "SELECT tenantId FROM tenants";
+        boolean tenantIdValidity = false;
+        try (var conn = DriverManager.getConnection(databaseURL);
+             var pstmtGetIds = conn.prepareStatement(sqlGetIds)) {
+            ResultSet rs = pstmtGetIds.executeQuery();
+            while (rs.next()) {
+                if (tenantId == rs.getInt("tenantId")) {
+                    tenantIdValidity = true;
+                }
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+        if (!tenantIdValidity) {
+            throw new InvalidIdException();
+        }
+    }
+    public static void checkFlatIdValidity(int flatId) throws InvalidIdException {
+        var sqlGetIds = "SELECT flatId FROM flats";
+        boolean flatIdValidity = false;
+        try (var conn = DriverManager.getConnection(databaseURL);
+             var pstmtGetIds = conn.prepareStatement(sqlGetIds)) {
+            ResultSet rs = pstmtGetIds.executeQuery();
+            while (rs.next()) {
+                if (flatId == rs.getInt("flatId")) {
+                    flatIdValidity = true;
+                }
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+        if (!flatIdValidity) {
+            throw new InvalidIdException();
+        }
+    }
+    public static void checkReportIdValidity(int reportId) throws InvalidIdException {
+        var sqlGetIds = "SELECT reportId FROM counterStatesReport";
+        boolean reportIdValidity = false;
+        try (var conn = DriverManager.getConnection(databaseURL);
+             var pstmtGetIds = conn.prepareStatement(sqlGetIds)) {
+            ResultSet rs = pstmtGetIds.executeQuery();
+            while (rs.next()) {
+                if (reportId == rs.getInt("reportId")) {
+                    reportIdValidity = true;
+                }
+            }
+        } catch (SQLException e) {
+            logger.info(e.getMessage());
+        }
+        if (!reportIdValidity) {
+            throw new InvalidIdException();
+        }
+    }
     private static int calculateBill(int heatingRate, int counterState, int mainCounterState, int tenantAmount) {
         return heatingRate * (counterState + mainCounterState/tenantAmount);
     }
@@ -26,7 +82,7 @@ public class Landlord implements LandlordDAO {
             pstmt.setInt(2, heatingPower);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -53,7 +109,7 @@ public class Landlord implements LandlordDAO {
             pstmtUpdateFlat.setInt(2, flatId);
             pstmtUpdateFlat.executeUpdate();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -70,7 +126,7 @@ public class Landlord implements LandlordDAO {
             pstmt.setString(1, date);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -124,19 +180,19 @@ public class Landlord implements LandlordDAO {
             }
             pstmtAddBillToHistory.executeBatch();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
     @Override
-    public ArrayList<CounterStatesResults> readControlResults(int reportId) {
-        var sql = "SELECT * FROM counterStatesReport WHERE reportId = ?";
+    public ArrayList<CounterStatesResults> readControlResults() {
+        var sql = "SELECT * FROM counterStatesReport";
         var counterStatesReport = new ArrayList<CounterStatesResults>();
         //attempt to read data
         CounterStatesResults counterStatesResults;
         try (var conn = DriverManager.getConnection(databaseURL);
              var pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, reportId);
+            //pstmt.setInt(1, reportId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 counterStatesResults = new CounterStatesResults(rs.getInt("reportId"),
@@ -147,7 +203,7 @@ public class Landlord implements LandlordDAO {
                 counterStatesReport.add(counterStatesResults);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
         return counterStatesReport;
     }
@@ -164,7 +220,7 @@ public class Landlord implements LandlordDAO {
                 lazyBunsIdList.add(rsLazyBunsIds.getInt("tenantId"));
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
         return lazyBunsIdList;
     }
@@ -186,7 +242,7 @@ public class Landlord implements LandlordDAO {
                 flatInfoList.add(flatInfo);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
         return flatInfoList;
     }
@@ -207,7 +263,7 @@ public class Landlord implements LandlordDAO {
                 tenantInfoList.add(tenantInfo);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
         return tenantInfoList;
     }
@@ -220,7 +276,7 @@ public class Landlord implements LandlordDAO {
             pstmtUpdateMainCounter.setInt(1, mainCounterState);
             pstmtUpdateMainCounter.executeUpdate();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -235,34 +291,28 @@ public class Landlord implements LandlordDAO {
             pstmtDestroyFlat.setInt(1, flatId);
             pstmtDestroyFlat.execute();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
     @Override
     public void destroyTenant(int tenantId) {
-        var sqlFindTenantsFlat = "SELECT tenantId FROM flats WHERE flatId = ?";
         var sqlUpdateFlatsTenant = "UPDATE flats SET tenantId = null WHERE tenantId = ?";
         var sqlDestroyTenant = "DELETE FROM tenants WHERE tenantId = ?";
         var sqlPRAGMA = "PRAGMA foreign_keys=ON";
         try (var conn = DriverManager.getConnection(databaseURL);
              var pstmtDestroyTenant = conn.prepareStatement(sqlDestroyTenant);
-             var pstmtFindTenantsFlat = conn.prepareStatement(sqlFindTenantsFlat);
              var pstmtUpdateFlatsTenant = conn.prepareStatement(sqlUpdateFlatsTenant);
              var pstmtPRAGMA = conn.prepareStatement(sqlPRAGMA)) {
-            //find tenant's flat
-            pstmtDestroyTenant.setInt(1, tenantId);
-            ResultSet tenantsFlatIdRS = pstmtFindTenantsFlat.executeQuery();
-            int tenantsFlatId = tenantsFlatIdRS.getInt(1);
             //update tenant's flat's id to NULL
-            pstmtUpdateFlatsTenant.setInt(1, tenantsFlatId);
+            pstmtUpdateFlatsTenant.setInt(1, tenantId);
             pstmtUpdateFlatsTenant.executeUpdate();
             //remove tenant
             pstmtPRAGMA.execute();
             pstmtDestroyTenant.setInt(1, tenantId);
             pstmtDestroyTenant.execute();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
