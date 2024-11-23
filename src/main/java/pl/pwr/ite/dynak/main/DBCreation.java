@@ -15,14 +15,11 @@ public class DBCreation {
                 + "counter INTEGER NOT NULL,"
                 + "tenantId INTEGER,"
                 + "heaterPower INTEGER)";
-        var counterStates = "CREATE TABLE IF NOT EXISTS counterStates ("
-                + "flatId INTEGER PRIMARY KEY,"
-                + "amount INTEGER NOT NULL,"
-                + "FOREIGN KEY (flatId) REFERENCES flats(flatId) ON DELETE CASCADE)";
         var counterStatesReport = "CREATE TABLE IF NOT EXISTS counterStatesReport ("
                 + "reportId INTEGER REFERENCES controlOrder(orderId),"
                 + "tenantId INTEGER,"
                 + "amount INTEGER NOT NULL,"
+                + "flatId INTEGER NOT NULL,"
                 + "date TEXT NOT NULL,"
                 + "FOREIGN KEY (tenantId) REFERENCES tenants(tenantId) ON DELETE CASCADE)";
         var controlOrder = "CREATE TABLE IF NOT EXISTS controlOrder ("
@@ -31,28 +28,34 @@ public class DBCreation {
         var dueBills = "CREATE TABLE IF NOT EXISTS dueBills ("
                 + "billId INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "tenantId INTEGER NOT NULL,"
-                + "amount REAL NOT NULL,"
+                + "amount INTEGER NOT NULL,"
                 + "date TEXT NOT NULL,"
                 + "FOREIGN KEY (tenantId) REFERENCES tenants(tenantId) ON DELETE CASCADE)";
         var billingHistory = "CREATE TABLE IF NOT EXISTS billingHistory ("
                 + "tenantId INTEGER,"
-                + "amount REAL NOT NULL,"
+                + "amount INTEGER NOT NULL,"
                 + "date TEXT NOT NULL,"
                 + "billId INTEGER NOT NULL)";
         var mainCounter = "CREATE TABLE IF NOT EXISTS mainCounter ("
                 + "counter INTEGER NOT NULL)";
+        var paymentHistory = "CREATE TABLE IF NOT EXISTS paymentHistory ("
+                + "tenantId INTEGER,"
+                + "amount INTEGER NOT NULL,"
+                + "date TEXT NOT NULL,"
+                + "billId INTEGER NOT NULL,"
+                + "FOREIGN KEY (billId) REFERENCES bills(billId) ON DELETE CASCADE)";
         var mainCounterInitialise = "INSERT INTO mainCounter (counter) VALUES (0)";
         try (var conn = DriverManager.getConnection(url);
              var stmt = conn.createStatement()) {
             stmt.execute(tenantsTable);
             stmt.execute(flatsTable);
-            stmt.execute(counterStates);
             stmt.execute(counterStatesReport);
             stmt.execute(controlOrder);
             stmt.execute(dueBills);
             stmt.execute(billingHistory);
             stmt.execute(mainCounter);
             stmt.execute(mainCounterInitialise);
+            stmt.execute(paymentHistory);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

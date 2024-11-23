@@ -1,23 +1,24 @@
 package pl.pwr.ite.dynak.landlord;
 
-import pl.pwr.ite.dynak.dataRecords.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pl.pwr.ite.dynak.dataUtils.*;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public class Landlord implements LandlordDAO {
-    @Getter
-    @Setter
+    private static final Logger logger = LoggerFactory.getLogger(Landlord.class);
     String databaseURL = "jdbc:sqlite:propertyData.sqlite";
-
-    private static double calculateBill(double heatingRate, int counterState) {
-        return (double)Math.round(heatingRate * counterState*100)/100;
+    private static int calculateBill(int heatingRate, int counterState, int mainCounterState, int tenantAmount) {
+        return heatingRate * (counterState + mainCounterState/tenantAmount);
     }
     @Override
-    public void createFlat(int heatingPower) {
+    public void createFlat(int heatingPower) throws NumberFormatException {
         var flatCreation = "INSERT INTO flats(Counter,heaterPower) VALUES(?,?)";
         try (var conn = DriverManager.getConnection(databaseURL);
              var pstmt = conn.prepareStatement(flatCreation)) {
@@ -25,7 +26,7 @@ public class Landlord implements LandlordDAO {
             pstmt.setInt(2, heatingPower);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
@@ -41,16 +42,18 @@ public class Landlord implements LandlordDAO {
             //create tenant
             pstmtTenantCreation.setString(1, name);
             pstmtTenantCreation.setInt(2, flatId);
-            pstmtTenantCreation.executeUpdate();
+            pstmtTenantCreation.execute();
             //retrieve new tenant's ID based on his name
+            pstmtGetTenantId.setString(1, name);
             ResultSet tenantIdRS = pstmtGetTenantId.executeQuery();
+            tenantIdRS.next();
             int tenantId = tenantIdRS.getInt(1);
             //update tenant's flat's tenantId
-            pstmtGetTenantId.setString(1, name);
             pstmtUpdateFlat.setInt(1, tenantId);
             pstmtUpdateFlat.setInt(2, flatId);
+            pstmtUpdateFlat.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
@@ -67,37 +70,44 @@ public class Landlord implements LandlordDAO {
             pstmt.setString(1, date);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
     @Override
-    public void createBills(int reportId, String date, double rate) {
+    public void createBills(int reportId, String date, int rate) {
         var sqlBillCreation = "INSERT INTO dueBills(tenantId, amount, date) VALUES(?,?,?)";
         var sqlGetCounterStatesReportData = "SELECT tenantId, amount FROM counterStatesReport WHERE reportId = ?";
         var sqlAddBillToHistory = "INSERT INTO billingHistory VALUES (?,?,?,?)";
         var sqlGetBillId = "SELECT billId FROM dueBills WHERE tenantId = ? AND date = ?";
+        var sqlGetMainCounterState = "SELECT counter FROM mainCounter";
+        var sqlGetAmountOfTenants = "SELECT COUNT(*) AS tenantAmount FROM tenants";
         try (var conn = DriverManager.getConnection(databaseURL);
              var pstmtBillCreation = conn.prepareStatement(sqlBillCreation);
              var pstmtGetCounterStatesReportData = conn.prepareStatement(sqlGetCounterStatesReportData);
              var pstmtAddBillToHistory = conn.prepareStatement(sqlAddBillToHistory);
-             var pstmtGetBillId = conn.prepareStatement(sqlGetBillId);) {
+             var pstmtGetBillId = conn.prepareStatement(sqlGetBillId);
+             var pstmtGetMainCounterState = conn.prepareStatement(sqlGetMainCounterState);
+             var pstmtGetAmountOfTenants = conn.prepareStatement(sqlGetAmountOfTenants)) {
             //get ResultSet from counterStatesReportData
             pstmtGetCounterStatesReportData.setInt(1, reportId);
             ResultSet rsCounterStatesReportData = pstmtGetCounterStatesReportData.executeQuery();
-
+            ResultSet rsGetMainCounterState = pstmtGetMainCounterState.executeQuery();
+            int mainCounterState = rsGetMainCounterState.getInt("counter");
             //set dates to statements
             pstmtBillCreation.setString(3, date);
             pstmtAddBillToHistory.setString(3, date);
             pstmtGetBillId.setString(2, date);
+            ResultSet rsTenantAmount = pstmtGetAmountOfTenants.executeQuery();
+            int tenantAmount = rsTenantAmount.getInt("tenantAmount");
             //loop that creates bills per flat
             while (rsCounterStatesReportData.next()) {
                 int tenantId = rsCounterStatesReportData.getInt("tenantId");
-                double billAmount = calculateBill(rate, rsCounterStatesReportData.getInt("amount"));
+                int billAmount = calculateBill(rate, rsCounterStatesReportData.getInt("amount"), mainCounterState, tenantAmount);
 
                 //fills bills sql statement with info
                 pstmtBillCreation.setInt(1, tenantId);
-                pstmtBillCreation.setDouble(2, billAmount);
+                pstmtBillCreation.setInt(2, billAmount);
                 //submit bill to database
                 pstmtBillCreation.execute();
 
@@ -107,40 +117,39 @@ public class Landlord implements LandlordDAO {
 
                 //fills billHistory with freshly created bill
                 pstmtAddBillToHistory.setInt(1, tenantId);
-                pstmtAddBillToHistory.setDouble(2, billAmount);
+                pstmtAddBillToHistory.setInt(2, billAmount);
                 pstmtAddBillToHistory.setInt(4, rsGetBillId.getInt("billId"));
-                pstmtAddBillToHistory.execute();
+                pstmtAddBillToHistory.addBatch();
                 //submits bill to database and history
             }
+            pstmtAddBillToHistory.executeBatch();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
     @Override
-    public CounterStatesResults readControlResults(int reportId) {
+    public ArrayList<CounterStatesResults> readControlResults(int reportId) {
         var sql = "SELECT * FROM counterStatesReport WHERE reportId = ?";
-        //takes the flatId as key and amount as value
-        var counterStatesReport = new HashMap<Integer, Integer>();
+        var counterStatesReport = new ArrayList<CounterStatesResults>();
         //attempt to read data
-        CounterStatesResults counterStatesResults = null;
+        CounterStatesResults counterStatesResults;
         try (var conn = DriverManager.getConnection(databaseURL);
              var pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, reportId);
-
             ResultSet rs = pstmt.executeQuery();
-            //saves date to variable
-            String date = rs.getString("date");
-            //saves amount of used heat in a flat and the flat's ID to a hashmap
             while (rs.next()) {
-                counterStatesReport.put(rs.getInt("flatId"), rs.getInt("amount"));
+                counterStatesResults = new CounterStatesResults(rs.getInt("reportId"),
+                                                                rs.getInt("tenantId"),
+                                                                rs.getInt("amount"),
+                                                                rs.getInt("flatId"),
+                                                                rs.getString("date"));
+                counterStatesReport.add(counterStatesResults);
             }
-            //creates record of the hashmap and date
-            counterStatesResults = new CounterStatesResults(counterStatesReport, date);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
-        return counterStatesResults;
+        return counterStatesReport;
     }
 
     @Override
@@ -155,7 +164,7 @@ public class Landlord implements LandlordDAO {
                 lazyBunsIdList.add(rsLazyBunsIds.getInt("tenantId"));
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return lazyBunsIdList;
     }
@@ -168,8 +177,8 @@ public class Landlord implements LandlordDAO {
              var pstmtSqlFlats = conn.prepareStatement(sqlFlats)) {
             ResultSet rsFlatInfo = pstmtSqlFlats.executeQuery();
             flatInfoList = new ArrayList<>();
-            Integer[] flatInfo = new Integer[4];
             while (rsFlatInfo.next()) {
+                Integer[] flatInfo = new Integer[4];
                 flatInfo[0] = rsFlatInfo.getInt("flatId");
                 flatInfo[1] = rsFlatInfo.getInt("counter");
                 flatInfo[2] = rsFlatInfo.getInt("tenantId");
@@ -177,7 +186,7 @@ public class Landlord implements LandlordDAO {
                 flatInfoList.add(flatInfo);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return flatInfoList;
     }
@@ -198,7 +207,7 @@ public class Landlord implements LandlordDAO {
                 tenantInfoList.add(tenantInfo);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return tenantInfoList;
     }
@@ -211,7 +220,7 @@ public class Landlord implements LandlordDAO {
             pstmtUpdateMainCounter.setInt(1, mainCounterState);
             pstmtUpdateMainCounter.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
@@ -226,7 +235,7 @@ public class Landlord implements LandlordDAO {
             pstmtDestroyFlat.setInt(1, flatId);
             pstmtDestroyFlat.execute();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
@@ -253,7 +262,7 @@ public class Landlord implements LandlordDAO {
             pstmtDestroyTenant.setInt(1, tenantId);
             pstmtDestroyTenant.execute();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 

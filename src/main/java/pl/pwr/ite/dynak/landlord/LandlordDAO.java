@@ -1,7 +1,8 @@
 package pl.pwr.ite.dynak.landlord;
-import pl.pwr.ite.dynak.dataRecords.CounterStatesResults;
-import pl.pwr.ite.dynak.dataRecords.TenantInfo;
+import pl.pwr.ite.dynak.dataUtils.CounterStatesResults;
+import pl.pwr.ite.dynak.dataUtils.TenantInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface LandlordDAO {
@@ -9,8 +10,8 @@ public interface LandlordDAO {
     public void createTenant(String name, int tenantId);
     public void createHeater(int heaterPower);
     public void createControlOrder(String date);
-    public void createBills(int reportId, String date, double rate);
-    public CounterStatesResults readControlResults(int reportId);
+    public void createBills(int reportId, String date, int rate);
+    public List<CounterStatesResults> readControlResults(int reportId);
     //Finds tenants who haven't paid their bills
     public List<Integer> readLazyBunsIds();
     public List<Integer[]> readFlats();

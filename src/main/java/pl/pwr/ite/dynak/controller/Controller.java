@@ -1,12 +1,73 @@
 package pl.pwr.ite.dynak.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pl.pwr.ite.dynak.dataUtils.ControlOrderData;
+
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Controller implements ControllerDAO{
+    private static final Logger logger = LoggerFactory.getLogger(Controller.class);
+    String databaseURL = "jdbc:sqlite:propertyData.sqlite";
+
     @Override
-    public void createReport() {}
+    public void createReport(String date, int orderId) {
+        var sqlGetCounterStates = "SELECT flatId, tenantId, counter FROM flats";
+        var sqlCreateReport = "INSERT INTO counterStatesReport(reportId, tenantId, amount, date, flatId) VALUES (?,?,?,?,?)";
+        try (var conn = DriverManager.getConnection(databaseURL);
+             var pstmtGetCounterStates = conn.prepareStatement(sqlGetCounterStates);
+             var pstmtCreateReport = conn.prepareStatement(sqlCreateReport)) {
+            ResultSet rsCounterStates = pstmtGetCounterStates.executeQuery();
+            pstmtCreateReport.setInt(1, orderId);
+            pstmtCreateReport.setString(4, date);
+            while (rsCounterStates.next()) {
+                pstmtCreateReport.setInt(2, rsCounterStates.getInt("tenantId"));
+                pstmtCreateReport.setInt(3, rsCounterStates.getInt("counter"));
+                pstmtCreateReport.setInt(5, rsCounterStates.getInt("flatId"));
+                pstmtCreateReport.addBatch();
+            }
+            pstmtCreateReport.executeBatch();
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+    }
     @Override
-    public void readCounters() {}
+    public ControlOrderData readControlOrder() {
+        var sql = "SELECT * FROM controlOrder";
+        //attempt to read data
+        ControlOrderData controlOrderData = null;
+        try (var conn = DriverManager.getConnection(databaseURL);
+             var pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            int orderId = rs.getInt("orderId");
+            String date = rs.getString("date");
+            controlOrderData = new ControlOrderData(orderId, date);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+        return controlOrderData;
+    }
     @Override
-    public void updateCounters() {}
+    public void updateCounters() {
+        var sql = "UPDATE flats SET counter = 0";
+        try (var conn = DriverManager.getConnection(databaseURL);
+             var pstmt = conn.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+    }
     @Override
-    public void deleteBribe() {}
+    public void deleteControlOrder(int orderId) {
+        var sql = "DELETE FROM controlOrder WHERE orderId = ?";
+        try (var conn = DriverManager.getConnection(databaseURL);
+             var pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, orderId);
+            pstmt.execute();
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+    }
 }

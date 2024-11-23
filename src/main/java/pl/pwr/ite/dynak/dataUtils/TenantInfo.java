@@ -1,3 +1,3 @@
-package pl.pwr.ite.dynak.dataRecords;
+package pl.pwr.ite.dynak.dataUtils;
 
 public record TenantInfo (int tenantId, String name, int flatId) {}

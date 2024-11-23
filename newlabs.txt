@@ -21,8 +21,5 @@ komunikacja ma się odbywać poprzez dane zapisywane na dysku
 w intellij trzeba zaznaczyć "allow multiple instances"
 
 TODO:
-Logger
 custom exception
-UI
-finish tenant and controller
 debugging/testing
