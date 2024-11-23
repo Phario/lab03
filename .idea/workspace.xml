@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de7cbaa3-72b0-4ede-a5bd-103aab667937" name="Changes" comment="LandLord finished, tenant needs 1 more method, slight db changes, cascade delete works">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/landlord/LandlordApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/Tenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/Tenant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/pwr/ite/dynak/tenant/TenantDAO.java" afterDir="false" />
-    </list>
+    <list default="true" id="de7cbaa3-72b0-4ede-a5bd-103aab667937" name="Changes" comment="minor changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -149,7 +144,7 @@
       <workItem from="1732053076433" duration="4932000" />
       <workItem from="1732101297186" duration="20250000" />
       <workItem from="1732233778445" duration="1663000" />
-      <workItem from="1732304292212" duration="4371000" />
+      <workItem from="1732304292212" duration="4393000" />
     </task>
     <task id="LOCAL-00001" summary="Start of something that may or may not work (let's hope it's the former).">
       <option name="closed" value="true" />
@@ -175,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732230163512</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="minor changes">
+      <option name="closed" value="true" />
+      <created>1732320881072</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732320881072</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +199,7 @@
     <MESSAGE value="Start of something that may or may not work (let's hope it's the former)." />
     <MESSAGE value="Landlord back-end progress (yes, I know what it sounds like)" />
     <MESSAGE value="LandLord finished, tenant needs 1 more method, slight db changes, cascade delete works" />
-    <option name="LAST_COMMIT_MESSAGE" value="LandLord finished, tenant needs 1 more method, slight db changes, cascade delete works" />
+    <MESSAGE value="minor changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor changes" />
   </component>
 </project>

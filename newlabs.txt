@@ -1,0 +1,28 @@
+dowolne formatowanie plików
+wymysleć wzór na zużycie z głównego licznika
+można kilku kontrolerów
+licznik do mieszkania + licznik główny (części wspólnych)
+3 klasy, każda ze swoją metodą main w 1 projekcie, każda produkuje swój interfejs
+użyć wzorca DAO
+operacje CRUD w interfejsach
+najpierw wymyśleć DAO (interfejs), tych metod użyć w implementacji głównej
+ma otwierać się menu i ma być możliwe używanie funkcji DAO
+(do sqlite trzeba dodać dependency do mavena)
+maven plugin do kompilowania javy (nie schodzić poniżej 3.9)
+do module info:
+requires java.sql;
+requires org.xerial.sqlitejdbc;
+requires org.slf4j;
+//blok statycznej inicjalizacji static
+użyć loggera jeśli chcemy (wyświetlanie warningów itd, użyć do tego loggera) utworzyć fabrykę i pokazać, z jaką klasą
+fabryka ma sie wiązać
+przynajmniej 3 interfejsy
+komunikacja ma się odbywać poprzez dane zapisywane na dysku
+w intellij trzeba zaznaczyć "allow multiple instances"
+
+TODO:
+Logger
+custom exception
+UI
+finish tenant and controller
+debugging/testing
