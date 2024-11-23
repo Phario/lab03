@@ -14,8 +14,14 @@ public class Tenant implements TenantDAO {
     @Setter
     private String databaseURL = "jdbc:sqlite:propertyData.sqlite";
     @Override
-    public void createBribe() {
+    public void createBribe(double amount, int billId) {
+        var sqlCreateBribe = "";
+        try (var conn = DriverManager.getConnection(databaseURL);
+             var pstmtCreateBribe = conn.prepareStatement(sqlCreateBribe)) {
 
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
