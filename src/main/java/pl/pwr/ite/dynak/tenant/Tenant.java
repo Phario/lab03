@@ -30,6 +30,7 @@ public class Tenant implements TenantDAO {
         try (var conn = DriverManager.getConnection(databaseURL);
              var pstmtCreatePayment = conn.prepareStatement(sqlCreatePayment);
              var pstmtGetDueBillAmount = conn.prepareStatement(sqlGetDueBillAmount)) {
+            pstmtGetDueBillAmount.setInt(1, tenantId);
             ResultSet rsDueBillAmount = pstmtGetDueBillAmount.executeQuery();
             int amount = rsDueBillAmount.getInt("amount");
             pstmtCreatePayment.setInt(1, tenantId);
@@ -38,7 +39,7 @@ public class Tenant implements TenantDAO {
             pstmtCreatePayment.setInt(4, billId);
             pstmtCreatePayment.execute();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
