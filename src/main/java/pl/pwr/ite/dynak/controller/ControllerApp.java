@@ -42,8 +42,8 @@ public class ControllerApp extends Application {
         var fieldCRReportId = new TextField();
         var fieldDRReportId = new TextField();
         fieldDate.setPromptText("Date");
-        fieldCRReportId.setPromptText("Report ID");
-        fieldDRReportId.setPromptText("Report ID");
+        fieldCRReportId.setPromptText("Order ID");
+        fieldDRReportId.setPromptText("Order ID");
         grid.add(createReportButton, 0, 0); grid.add(fieldDate, 1, 0); grid.add(fieldCRReportId, 2, 0);
         grid.add(readControlOrderButton, 0, 1);
         grid.add(updateCountersButton, 0, 2);

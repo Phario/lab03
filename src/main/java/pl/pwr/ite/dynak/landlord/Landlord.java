@@ -192,7 +192,6 @@ public class Landlord implements LandlordDAO {
         CounterStatesResults counterStatesResults;
         try (var conn = DriverManager.getConnection(databaseURL);
              var pstmt = conn.prepareStatement(sql)) {
-            //pstmt.setInt(1, reportId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 counterStatesResults = new CounterStatesResults(rs.getInt("reportId"),

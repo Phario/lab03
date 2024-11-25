@@ -19,7 +19,7 @@ public class DBCreation {
                 + "reportId INTEGER REFERENCES controlOrder(orderId),"
                 + "tenantId INTEGER,"
                 + "amount INTEGER NOT NULL,"
-                + "flatId INTEGER NOT NULL,"
+                + "flatId INTEGER NOT NULL REFERENCES flats(flatId),"
                 + "date TEXT NOT NULL,"
                 + "FOREIGN KEY (tenantId) REFERENCES tenants(tenantId) ON DELETE CASCADE)";
         var controlOrder = "CREATE TABLE IF NOT EXISTS controlOrder ("
@@ -42,8 +42,7 @@ public class DBCreation {
                 + "tenantId INTEGER,"
                 + "amount INTEGER NOT NULL,"
                 + "date TEXT NOT NULL,"
-                + "billId INTEGER NOT NULL,"
-                + "FOREIGN KEY (billId) REFERENCES bills(billId) ON DELETE CASCADE)";
+                + "billId INTEGER NOT NULL)";
         var mainCounterInitialise = "INSERT INTO mainCounter (counter) VALUES (0)";
         try (var conn = DriverManager.getConnection(url);
              var stmt = conn.createStatement()) {

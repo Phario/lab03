@@ -97,6 +97,7 @@ public class TenantApp extends Application {
                 launchTenantApp(stage, tenantId);
             } catch (InvalidIdException e) {
                 logger.error(e.getMessage());
+                fieldSubmitId.clear();
             }
 
         });
